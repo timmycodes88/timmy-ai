@@ -55,6 +55,7 @@ export default function Home() {
         <Input
           ref={inputRef}
           onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
           value={prompt}
           onKeyDown={handleEnter}
           placeholder="Chat with me..."
