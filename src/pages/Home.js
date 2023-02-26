@@ -89,7 +89,10 @@ const FormContainer = styled.div(({ focused }) => [
 const Input = tw.input`w-[24rem] p-2 rounded-lg text-zinc-700`
 const Button = tw.button`bg-zinc-700 px-2 rounded-lg`
 const Conversation = tw.div`fixed top-[90px] left-0 w-full flex flex-col gap-4 px-4  h-full pb-4`
-const History = tw.div`flex flex-col gap-4 overflow-y-auto px-4 h-[calc(100% - 16.25rem)] `
+const History = styled.div(({ focused }) => [
+  tw`flex flex-col gap-4 overflow-y-auto px-4 h-[calc(100% - 16.25rem)] `,
+  focused && tw`h-[calc(100% - 15.25rem)]`,
+])
 const Message = styled.div(({ myMessage }) => [
   tw`p-4 rounded-lg`,
   myMessage ? tw`bg-zinc-900` : tw`bg-white text-zinc-900`,
