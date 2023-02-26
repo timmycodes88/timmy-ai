@@ -8,6 +8,8 @@ export default function Home() {
 
   const [prompt, setPrompt] = useState("")
 
+  const [focused, setFocused] = useState(false)
+
   const inputRef = useRef()
   const scrollToRef = useRef()
   const loadingRef = useRef()
@@ -15,6 +17,7 @@ export default function Home() {
   const handleGo = () => {
     if (!prompt) return
     inputRef.current.blur()
+    setFocused(false)
     generate(prompt)
     setPrompt("")
   }
@@ -48,9 +51,10 @@ export default function Home() {
         {loading && <Loading ref={loadingRef} />}
         {error && <ErrorText>An Unexpected Error occured</ErrorText>}
       </History>
-      <FormContainer>
+      <FormContainer focused={focused}>
         <Input
           ref={inputRef}
+          onFocus={() => setFocused(true)}
           value={prompt}
           onKeyDown={handleEnter}
           placeholder="Chat with me..."
@@ -67,7 +71,10 @@ const Wrapper = tw.div`h-full`
 const Title = tw.h1`text-3xl text-center pb-4`
 
 // Form Styles
-const FormContainer = tw.div`absolute bottom-0 left-0 w-full flex justify-center gap-4 bg-zinc-900 p-4 pb-12`
+const FormContainer = styled.div(({ focused }) => [
+  tw`absolute bottom-0 left-0 w-full flex justify-center gap-4 bg-zinc-900 p-4 pb-12`,
+  focused && tw`pb-4`,
+])
 const Input = tw.input`w-[24rem] p-2 rounded-lg text-zinc-700`
 const Button = tw.button`bg-zinc-700 px-2 rounded-lg`
 const History = tw.div`flex flex-col gap-4 overflow-y-auto px-4 h-[calc(100% - 16.25rem)] `
