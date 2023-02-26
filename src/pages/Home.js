@@ -16,10 +16,10 @@ export default function Home() {
 
   const handleGo = () => {
     if (!prompt) return
-    inputRef.current.blur()
-    setFocused(false)
     generate(prompt)
     setPrompt("")
+    inputRef.current.blur()
+    setFocused(false)
   }
   const handleEnter = e => e.key === "Enter" && handleGo()
 
@@ -84,7 +84,7 @@ const Title = tw.h1`text-3xl text-center pb-4`
 // Form Styles
 const FormContainer = styled.div(({ focused }) => [
   tw`fixed bottom-0 left-0 w-full flex justify-center gap-4 bg-zinc-900 p-4 pb-12`,
-  focused && tw`pb-4`,
+  focused && tw`pb-8`,
 ])
 const Input = tw.input`w-[24rem] p-2 rounded-lg text-zinc-700`
 const Button = tw.button`bg-zinc-700 px-2 rounded-lg`
