@@ -73,7 +73,7 @@ const Title = tw.h1`text-3xl text-center pb-4`
 
 // Form Styles
 const FormContainer = styled.div(({ focused }) => [
-  tw`absolute bottom-0 left-0 w-full flex justify-center gap-4 bg-zinc-900 p-4 pb-12`,
+  tw`fixed bottom-0 left-0 w-full flex justify-center gap-4 bg-zinc-900 p-4 pb-12`,
   focused && tw`pb-4`,
 ])
 const Input = tw.input`w-[24rem] p-2 rounded-lg text-zinc-700`
