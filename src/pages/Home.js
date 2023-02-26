@@ -8,11 +8,13 @@ export default function Home() {
 
   const [prompt, setPrompt] = useState("")
 
+  const inputRef = useRef()
   const scrollToRef = useRef()
   const loadingRef = useRef()
 
   const handleGo = () => {
     if (!prompt) return
+    inputRef.current.blur()
     generate(prompt)
     setPrompt("")
   }
@@ -48,6 +50,7 @@ export default function Home() {
       </History>
       <FormContainer>
         <Input
+          ref={inputRef}
           value={prompt}
           onKeyDown={handleEnter}
           placeholder="Chat with me..."
