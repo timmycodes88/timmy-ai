@@ -61,7 +61,7 @@ export default function Home() {
 
 // Wrapper Styles
 const Wrapper = tw.div`h-full`
-const Title = tw.h1`text-3xl text-center pb-4 underline`
+const Title = tw.h1`text-3xl text-center pb-4`
 
 // Form Styles
 const FormContainer = tw.div`absolute bottom-0 left-0 w-full flex justify-center gap-4 bg-zinc-900 p-4 pb-8`

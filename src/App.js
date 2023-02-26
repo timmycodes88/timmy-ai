@@ -1,11 +1,41 @@
+import { useEffect, useState } from "react"
 import { Outlet } from "react-router-dom"
-import tw from "twin.macro"
+import tw, { styled, css } from "twin.macro"
+
+const colors = [
+  "red",
+  "dodgerblue",
+  "lime",
+  "yellow",
+  "magenta",
+  "darkturquoise",
+]
 
 function App() {
+  const [easterEgg, setEasterEgg] = useState(false)
+  const [colorIndex, setColorIndex] = useState(undefined)
+  useEffect(() => {
+    let interval
+    if (easterEgg) {
+      setColorIndex(0)
+      interval = setInterval(() => {
+        setColorIndex(curr => (curr + 1) % colors.length)
+      }, 500)
+    } else {
+      setColorIndex(undefined)
+    }
+    return () => clearInterval(interval)
+  }, [easterEgg])
+
   return (
     <Wrapper>
       <NavBar>
-        <Title>Timmy AI</Title>
+        <Title
+          color={colors[colorIndex]}
+          onClick={() => setEasterEgg(curr => !curr)}
+        >
+          Timmy AI
+        </Title>
       </NavBar>
 
       <Content>
@@ -18,6 +48,12 @@ function App() {
 export default App
 
 const Wrapper = tw.div`fixed w-screen h-screen bg-zinc-800`
-const Title = tw.h1`text-4xl text-white`
+const Title = styled.h1(({ color }) => [
+  tw`text-4xl text-white`,
+  color &&
+    css`
+      color: ${color};
+    `,
+])
 const NavBar = tw.nav`flex items-center  px-10 py-5 bg-zinc-900`
 const Content = tw.div`mx-auto max-w-7xl mt-4 h-full text-white`
