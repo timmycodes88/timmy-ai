@@ -34,23 +34,25 @@ export default function Home() {
 
   return (
     <Wrapper>
-      <Title onClick={resetResponses}>Chat with Timmy</Title>
-      <History>
-        {responses.map((text, index) => {
-          const lastMessage = index + 1 === responses.length
-          const myMessage = text.includes("Me:")
-          return (
-            <Message
-              myMessage={myMessage}
-              ref={lastMessage ? scrollToRef : undefined}
-            >
-              {text}
-            </Message>
-          )
-        })}
-        {loading && <Loading ref={loadingRef} />}
-        {error && <ErrorText>An Unexpected Error occured</ErrorText>}
-      </History>
+      <Conversation>
+        <Title onClick={resetResponses}>Chat with Timmy</Title>
+        <History>
+          {responses.map((text, index) => {
+            const lastMessage = index + 1 === responses.length
+            const myMessage = text.includes("Me:")
+            return (
+              <Message
+                myMessage={myMessage}
+                ref={lastMessage ? scrollToRef : undefined}
+              >
+                {text}
+              </Message>
+            )
+          })}
+          {loading && <Loading ref={loadingRef} />}
+          {error && <ErrorText>An Unexpected Error occured</ErrorText>}
+        </History>
+      </Conversation>
       <FormContainer focused={focused}>
         <Input
           ref={inputRef}
@@ -78,6 +80,7 @@ const FormContainer = styled.div(({ focused }) => [
 ])
 const Input = tw.input`w-[24rem] p-2 rounded-lg text-zinc-700`
 const Button = tw.button`bg-zinc-700 px-2 rounded-lg`
+const Conversation = tw.div`fixed top-[90px] left-0 w-full flex flex-col gap-4 px-4 h-[calc(100% - 16.25rem)]`
 const History = tw.div`flex flex-col gap-4 overflow-y-auto px-4 h-[calc(100% - 16.25rem)] `
 const Message = styled.div(({ myMessage }) => [
   tw`p-4 rounded-lg`,

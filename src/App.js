@@ -55,5 +55,5 @@ const Title = styled.h1(({ color }) => [
       color: ${color};
     `,
 ])
-const NavBar = tw.nav`flex items-center  px-10 py-5 bg-zinc-900`
+const NavBar = tw.nav`fixed left-0 top-0 w-full flex items-center px-10 py-5 bg-zinc-900`
 const Content = tw.div`mx-auto max-w-7xl mt-4 h-full text-white`
