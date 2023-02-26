@@ -25,7 +25,33 @@ export default function useOpenAI() {
   const resetResponses = () => {
     setError(false)
     setLoading(false)
-    setResponses(["Timmy: Hi, I'm Timmy!"])
+    setResponses([
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+      "Timmy: Hi, I'm Timmy!",
+    ])
   }
   //* Get Responses
   const generate = async prompt => {
