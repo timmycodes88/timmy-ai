@@ -15,22 +15,7 @@ import { pretty } from "../utils/pretty"
  */
 export default function useOpenAI() {
   //* Responses State
-  const [responses, setResponses] = useState([
-    "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-    " make a type specimen book. It has survived not only five centuries, but also the leap i",
-    " make a type specimen book. It has survived not only five centuries, but also the leap i",
-    " make a type specimen book. It has survived not only five centuries, but also the leap i",
-    " make a type specimen book. It has survived not only five centuries, but also the leap i",
-    " make a type specimen book. It has survived not only five centuries, but also the leap i",
-    " make a type specimen book. It has survived not only five centuries, but also the leap i",
-    " make a type specimen book. It has survived not only five centuries, but also the leap i",
-    " make a type specimen book. It has survived not only five centuries, but also the leap i",
-    " make a type specimen book. It has survived not only five centuries, but also the leap i",
-    " make a type specimen book. It has survived not only five centuries, but also the leap i",
-    " make a type specimen book. It has survived not only five centuries, but also the leap i",
-    " make a type specimen book. It has survived not only five centuries, but also the leap i",
-    " make a type specimen book. It has survived not only five centuries, but also the leap i",
-  ])
+  const [responses, setResponses] = useState(["Timmy: Hi, I'm Timmy!"])
 
   //* Loading & Error State
   const [loading, setLoading] = useState(false)
