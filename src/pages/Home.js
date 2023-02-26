@@ -64,10 +64,10 @@ const Wrapper = tw.div`h-full`
 const Title = tw.h1`text-3xl text-center pb-4`
 
 // Form Styles
-const FormContainer = tw.div`absolute bottom-0 left-0 w-full flex justify-center gap-4 bg-zinc-900 p-4 pb-8`
+const FormContainer = tw.div`absolute bottom-0 left-0 w-full flex justify-center gap-4 bg-zinc-900 p-4 pb-12`
 const Input = tw.input`w-[24rem] p-2 rounded-lg text-zinc-700`
 const Button = tw.button`bg-zinc-700 px-2 rounded-lg`
-const History = tw.div`flex flex-col gap-4 overflow-y-auto px-4 h-[calc(100% - 15.25rem)] `
+const History = tw.div`flex flex-col gap-4 overflow-y-auto px-4 h-[calc(100% - 16.25rem)] `
 const Message = styled.div(({ myMessage }) => [
   tw`p-4 rounded-lg`,
   myMessage ? tw`bg-zinc-900` : tw`bg-white text-zinc-900`,

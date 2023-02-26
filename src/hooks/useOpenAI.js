@@ -15,7 +15,22 @@ import { pretty } from "../utils/pretty"
  */
 export default function useOpenAI() {
   //* Responses State
-  const [responses, setResponses] = useState([])
+  const [responses, setResponses] = useState([
+    "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+    " make a type specimen book. It has survived not only five centuries, but also the leap i",
+    " make a type specimen book. It has survived not only five centuries, but also the leap i",
+    " make a type specimen book. It has survived not only five centuries, but also the leap i",
+    " make a type specimen book. It has survived not only five centuries, but also the leap i",
+    " make a type specimen book. It has survived not only five centuries, but also the leap i",
+    " make a type specimen book. It has survived not only five centuries, but also the leap i",
+    " make a type specimen book. It has survived not only five centuries, but also the leap i",
+    " make a type specimen book. It has survived not only five centuries, but also the leap i",
+    " make a type specimen book. It has survived not only five centuries, but also the leap i",
+    " make a type specimen book. It has survived not only five centuries, but also the leap i",
+    " make a type specimen book. It has survived not only five centuries, but also the leap i",
+    " make a type specimen book. It has survived not only five centuries, but also the leap i",
+    " make a type specimen book. It has survived not only five centuries, but also the leap i",
+  ])
 
   //* Loading & Error State
   const [loading, setLoading] = useState(false)
@@ -39,7 +54,7 @@ export default function useOpenAI() {
       })
       const response = res.data.choices[0].text
 
-      setResponses(curr => [...curr, "Jake: " + response])
+      setResponses(curr => [...curr, "Timmy: " + response])
       setLoading(false)
     } catch {
       setError(true)
