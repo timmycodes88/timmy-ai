@@ -22,8 +22,11 @@ export default function useOpenAI() {
   const [error, setError] = useState(false)
 
   //* Reset Responses
-  const resetResponses = () => setResponses([])
-
+  const resetResponses = () => {
+    setError(false)
+    setLoading(false)
+    setResponses(["Timmy: Hi, I'm Timmy!"])
+  }
   //* Get Responses
   const generate = async prompt => {
     if (!prompt) return
@@ -44,7 +47,6 @@ export default function useOpenAI() {
     } catch {
       setError(true)
       setLoading(false)
-      resetResponses()
     }
   }
 
