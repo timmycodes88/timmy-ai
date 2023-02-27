@@ -1,7 +1,7 @@
-let VOICE_NAME = "Aaron"
+let VOICE_NAME = "Alex"
 
 const voiceLoader = async () => {
-  const { voice, voices } = await new Promise(resolve => {
+  const { voice } = await new Promise(resolve => {
     const timeout = setTimeout(() => resolve({ voice: null, voices: [] }), 5000)
     const voices = window.speechSynthesis.getVoices()
     if (voices.length) resolve(findVoice(voices))
