@@ -6,7 +6,7 @@ import { useLoaderData, useSubmit } from "react-router-dom"
 
 export default function Home() {
   const submit = useSubmit()
-  const voice = useLoaderData()
+  const { voice, voices } = useLoaderData()
   const { responses, loading, error, generate, resetResponses } = useOpenAI()
 
   const [prompt, setPrompt] = useState("")
@@ -61,6 +61,13 @@ export default function Home() {
         <Title onClick={resetResponses}>Reset</Title>
         <History>
           <Spacer />
+          {voices.map(voice => (
+            <Message
+              onClick={() => submit({ name: voice.name }, { method: "post" })}
+            >
+              {voice.name}
+            </Message>
+          ))}
           {responses.map((text, index) => {
             const lastMessage = index + 1 === responses.length
             const myMessage = text.includes("Me:")
