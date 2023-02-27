@@ -22,9 +22,9 @@ export default function Home() {
   const handleEnter = e => e.key === "Enter" && handleGo()
 
   useEffect(() => {
-    if (!loading && scrollToRef.current)
+    if (scrollToRef.current)
       scrollToRef.current.scrollIntoView({ behavior: "smooth" })
-  }, [loading])
+  }, [responses])
   useEffect(() => {
     if (scrollToRef.current)
       scrollToRef.current.scrollIntoView({ behavior: "smooth" })
