@@ -26,7 +26,7 @@ function App() {
   return (
     <Wrapper>
       <NavBar>
-        <Title color={colors[colorIndex]}>Timmy AI</Title>
+        <Title color={colors[colorIndex]}>Timmai</Title>
       </NavBar>
 
       <Content>

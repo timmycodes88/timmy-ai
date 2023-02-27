@@ -15,7 +15,7 @@ import { pretty } from "../utils/pretty"
  */
 export default function useOpenAI() {
   //* Responses State
-  const [responses, setResponses] = useState(["Timmy: Hi, I am Timmy!"])
+  const [responses, setResponses] = useState(["Timmai: Hi, I am Timmai!"])
 
   //* Loading & Error State
   const [loading, setLoading] = useState(false)
@@ -25,7 +25,7 @@ export default function useOpenAI() {
   const resetResponses = () => {
     setError(false)
     setLoading(false)
-    setResponses(["Timmy: Hi, I am Timmy!"])
+    setResponses(["Timmai: Hi, I am Timmai!"])
   }
   //* Get Responses
   const generate = async prompt => {
