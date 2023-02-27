@@ -1,4 +1,4 @@
-let VOICE_NAME = "Gordon"
+let VOICE_NAME = "Aaron"
 
 const voiceLoader = async () => {
   const { voice, voices } = await new Promise(resolve => {
