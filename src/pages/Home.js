@@ -24,6 +24,13 @@ export default function Home() {
   useEffect(() => {
     if (scrollToRef.current)
       scrollToRef.current.scrollIntoView({ behavior: "smooth" })
+
+    if (!responses[responses.length - 1].includes("Timmy:")) return
+    const synth = window.speechSynthesis
+    const utterThis = new SpeechSynthesisUtterance(
+      responses[responses.length - 1].split(":")[1]
+    )
+    synth.speak(utterThis)
   }, [responses])
   useEffect(() => {
     const timeout = setTimeout(() => {
