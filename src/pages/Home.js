@@ -52,7 +52,7 @@ export default function Home() {
               </Message>
             )
           })}
-          {loading && <Loading ref={loadingRef} />}
+          {!loading && <Loading ref={loadingRef} />}
           {error && <ErrorText>An Unexpected Error occured</ErrorText>}
         </History>
       </Conversation>

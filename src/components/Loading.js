@@ -23,7 +23,7 @@ export default function Loading() {
 }
 
 const Styles = styled.div(() => [
-  tw`mx-auto`,
+  tw`mx-auto scale-50`,
   css`
     .lds-spinner {
       color: official;

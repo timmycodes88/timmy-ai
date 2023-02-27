@@ -25,8 +25,7 @@ export default function useOpenAI() {
   const resetResponses = () => {
     setError(false)
     setLoading(false)
-    setResponses([])
-    setTimeout(() => setResponses(["Timmy: Hi, I'm Timmy!"]), 500)
+    setResponses(["Timmy: Hi, I'm Timmy!"])
   }
   //* Get Responses
   const generate = async prompt => {
