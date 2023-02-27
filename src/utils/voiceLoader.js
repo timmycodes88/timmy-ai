@@ -2,6 +2,7 @@ let VOICE_NAME = "Rocko"
 let VOICES = []
 
 const voiceLoader = async () => {
+  return null
   const { voice, voices } = await getVoices()
   VOICES = voices
   return { voice, names: voices.map(v => v.name) }
