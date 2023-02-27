@@ -1,30 +1,27 @@
-let VOICE_NAME
-let VOICES
+let VOICE_NAME = ""
+let VOICES = []
 
 const voiceLoader = async () => {
-  function getVoices() {
-    return new Promise(resolve => {
-      const synth = window.speechSynthesis
-      if (VOICES?.length) {
-        resolve(findVoice(VOICES))
-      } else {
-        synth.onvoiceschanged = () => {
-          resolve(findVoice(synth.getVoices()))
-        }
-      }
-    })
-  }
-
   const { voice, voices } = await getVoices()
   VOICES = voices
   return { voice, names: voices.map(v => v.name) }
-  return { voice: null, names: ["hi"] }
+}
+
+async function getVoices() {
+  return new Promise(resolve => {
+    if (VOICES.length) resolve(findVoice(VOICES))
+    const synth = window.speechSynthesis
+    synth.onvoiceschanged = () => {
+      console.log(findVoice(synth.getVoices()))
+      resolve(findVoice(synth.getVoices()))
+    }
+  })
 }
 
 const findVoice = voices => {
   let voice = voices.find(voice => voice.name === VOICE_NAME) || voices[0]
-
-  return { voice: voice || voice[0], voices }
+  console.log(voices, voice)
+  return { voice: voice, voices }
 }
 
 export const changeVoice = async ({ request }) => {
@@ -33,7 +30,6 @@ export const changeVoice = async ({ request }) => {
   VOICES.forEach(v => {
     if (v.name === data.name) VOICE_NAME = v.name
   })
-  console.log(VOICE_NAME)
   return null
 }
 export default voiceLoader
