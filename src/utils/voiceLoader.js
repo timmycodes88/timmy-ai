@@ -2,6 +2,12 @@ let VOICE_NAME = "Rocko"
 let VOICES = []
 
 const voiceLoader = async () => {
+  await new Promise(resolve => {
+    window.speechSynthesis.onvoiceschanged = () => {
+      resolve()
+    }
+  })
+
   return null
   const { voice, voices } = await getVoices()
   VOICES = voices
