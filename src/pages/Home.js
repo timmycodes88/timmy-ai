@@ -34,6 +34,7 @@ export default function Home() {
       const utterThis = new SpeechSynthesisUtterance(
         responses[responses.length - 1].split(":")[1]
       )
+      console.log(voice)
       utterThis.voice = voice
       synth.speak(utterThis)
     }, 100)

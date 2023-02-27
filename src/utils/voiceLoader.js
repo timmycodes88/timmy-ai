@@ -22,7 +22,7 @@ const findVoice = voices => {
   voices.forEach(voice => {
     names.push(voice.name)
     if (bestVoice) return
-    if (voice.name === "rocko") bestVoice = voice
+    if (voice.name === "Rocko") bestVoice = voice
     else if (voice.name === "Google UK English Male") {
       bestVoice = voice
     }
