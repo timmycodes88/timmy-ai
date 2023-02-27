@@ -13,30 +13,20 @@ const colors = [
 ]
 
 function App() {
-  const [easterEgg, setEasterEgg] = useState(false)
-  const [colorIndex, setColorIndex] = useState(undefined)
+  const [colorIndex, setColorIndex] = useState(0)
   useEffect(() => {
     let interval
-    if (easterEgg) {
-      setColorIndex(0)
-      interval = setInterval(() => {
-        setColorIndex(curr => (curr + 1) % colors.length)
-      }, 500)
-    } else {
-      setColorIndex(undefined)
-    }
+    interval = setInterval(() => {
+      setColorIndex(curr => (curr + 1) % colors.length)
+    }, 500)
+
     return () => clearInterval(interval)
-  }, [easterEgg])
+  }, [])
 
   return (
     <Wrapper>
       <NavBar>
-        <Title
-          color={colors[colorIndex]}
-          onClick={() => setEasterEgg(curr => !curr)}
-        >
-          Timmy AI
-        </Title>
+        <Title color={colors[colorIndex]}>Timmy AI</Title>
       </NavBar>
 
       <Content>
