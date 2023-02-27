@@ -18,8 +18,6 @@ export default function Home() {
     if (!prompt) return
     generate(prompt)
     setPrompt("")
-    inputRef.current.blur()
-    setFocused(false)
   }
   const handleEnter = e => e.key === "Enter" && handleGo()
 
@@ -37,6 +35,7 @@ export default function Home() {
       <Conversation>
         <Title onClick={resetResponses}>Chat with Timmy</Title>
         <History>
+          <Spacer />
           {responses.map((text, index) => {
             const lastMessage = index + 1 === responses.length
             const myMessage = text.includes("Me:")
@@ -79,7 +78,8 @@ export default function Home() {
 
 // Wrapper Styles
 const Wrapper = tw.div`h-full`
-const Title = tw.h1`text-3xl text-center pb-4`
+const Spacer = tw.div`h-[50vh]`
+const Title = tw.button`text-3xl text-center pb-4`
 
 // Form Styles
 const FormContainer = styled.div(({ focused }) => [
