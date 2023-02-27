@@ -26,8 +26,11 @@ export default function Home() {
       scrollToRef.current.scrollIntoView({ behavior: "smooth" })
   }, [responses])
   useEffect(() => {
-    if (loadingRef.current)
-      loadingRef.current.scrollIntoView({ behavior: "smooth" })
+    const timeout = setTimeout(() => {
+      if (loadingRef.current)
+        loadingRef.current.scrollIntoView({ behavior: "smooth" })
+    }, 100)
+    return () => clearTimeout(timeout)
   }, [loading])
 
   return (
