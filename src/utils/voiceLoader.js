@@ -3,9 +3,7 @@ let VOICES = []
 
 const voiceLoader = async () => {
   await new Promise(resolve => {
-    window.speechSynthesis.onvoiceschanged = () => {
-      resolve()
-    }
+    window.speechSynthesis.addEventListener("voiceschanged", () => resolve())
   })
 
   return null
