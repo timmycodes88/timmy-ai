@@ -55,7 +55,10 @@ export default function Home() {
         <History>
           <Spacer />
           {names.map(name => (
-            <Message onClick={() => submit({ name }, { method: "post" })}>
+            <Message
+              key={name}
+              onClick={() => submit({ name }, { method: "post" })}
+            >
               {name}
             </Message>
           ))}
