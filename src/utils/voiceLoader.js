@@ -1,4 +1,6 @@
-let VOICE_NAME = "Eddy"
+let VOICE_NAME = "Reed"
+let VOICES = []
+let VOICE
 
 const voiceLoader = async () => {
   const { voice, voices } = await new Promise(resolve => {
@@ -11,8 +13,8 @@ const voiceLoader = async () => {
       resolve(findVoice(voices))
     }
   })
-
-  return { voice, names: voices.map(v => v.name) }
+  VOICES = voices
+  return { voice: VOICE || voice, names: voices.map(v => v.name) }
 }
 
 const findVoice = voices => {
@@ -21,12 +23,12 @@ const findVoice = voices => {
   return { voice: voice, voices }
 }
 
-// export const changeVoice = async ({ request }) => {
-//   const formData = await request.formData()
-//   const data = Object.fromEntries(formData.entries())
-//   VOICES.forEach(v => {
-//     if (v.name === data.name) VOICE_NAME = v.name
-//   })
-//   return null
-// }
+export const changeVoice = async ({ request }) => {
+  const formData = await request.formData()
+  const data = Object.fromEntries(formData.entries())
+  VOICES.forEach(v => {
+    if (v.name === data.name) VOICE_NAME = v.name
+  })
+  return null
+}
 export default voiceLoader
