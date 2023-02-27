@@ -70,7 +70,6 @@ export default function Home() {
           placeholder="Chat with me..."
           onChange={e => setPrompt(e.target.value)}
         ></Input>
-        <Button onClick={handleGo}>Go!</Button>
       </FormContainer>
     </Wrapper>
   )
@@ -87,7 +86,6 @@ const FormContainer = styled.div(({ focused }) => [
   focused && tw`pb-8`,
 ])
 const Input = tw.input`w-[24rem] p-2 rounded-lg text-zinc-700`
-const Button = tw.button`bg-zinc-700 px-2 rounded-lg`
 const Conversation = tw.div`fixed top-[90px] left-0 w-full flex flex-col gap-4 px-4  h-full pb-4`
 const History = styled.div(({ focused }) => [
   tw`flex flex-col gap-4 overflow-y-auto px-4 h-[calc(100% - 16.25rem)] `,
