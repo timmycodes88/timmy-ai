@@ -15,7 +15,7 @@ import { pretty } from "../utils/pretty"
  */
 export default function useOpenAI() {
   //* Responses State
-  const [responses, setResponses] = useState(["Timmy: Hi, I'm Timmy!"])
+  const [responses, setResponses] = useState(["Timmy: Hi, I am Timmy!"])
 
   //* Loading & Error State
   const [loading, setLoading] = useState(false)
