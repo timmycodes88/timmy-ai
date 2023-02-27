@@ -1,6 +1,4 @@
 let VOICE_NAME = "Junior"
-let VOICES = []
-let VOICE
 
 const voiceLoader = async () => {
   const { voice, voices } = await new Promise(resolve => {
@@ -13,8 +11,7 @@ const voiceLoader = async () => {
       resolve(findVoice(voices))
     }
   })
-  VOICES = voices
-  return VOICE || voice
+  return voice
 }
 
 const findVoice = voices => {
