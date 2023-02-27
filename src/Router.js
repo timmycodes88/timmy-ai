@@ -1,7 +1,7 @@
 import { createBrowserRouter, redirect } from "react-router-dom"
 import App from "./App"
 import Home from "./pages/Home"
-import voiceLoader from "./utils/voiceLoader"
+import voiceLoader, { changeVoice } from "./utils/voiceLoader"
 
 const router = createBrowserRouter([
   {
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
       {
         index: true,
         loader: voiceLoader,
-        // action: changeVoice,
+        action: changeVoice,
         element: <Home />,
       },
     ],
