@@ -10,7 +10,7 @@ root.render(
   <React.StrictMode>
     <Suspense
       fallback={
-        <div className="w-screen h-screen flex justify-center items-center">
+        <div className="bg-zinc-800 w-screen h-screen flex justify-center items-center">
           <Loading />
         </div>
       }
