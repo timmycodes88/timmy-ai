@@ -29,7 +29,7 @@ export default function Home() {
       if (scrollToRef.current)
         scrollToRef.current.scrollIntoView({ behavior: "smooth" })
 
-      if (!responses[responses.length - 1].includes("Timmy:")) return
+      if (!responses[responses.length - 1].includes("Timmai:")) return
       const synth = window.speechSynthesis
       const utterThis = new SpeechSynthesisUtterance(
         responses[responses.length - 1].split(":")[1]
