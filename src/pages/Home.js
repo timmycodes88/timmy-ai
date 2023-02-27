@@ -47,8 +47,16 @@ export default function Home() {
     return () => clearTimeout(timeout)
   }, [loading])
 
+  const choices = ["Good News", "Jester", "Zarvox"]
+  const [nameIndex, setNameIndex] = useState(0)
+  const secretClick = () => {
+    submit({ name: choices[nameIndex] }, { method: "post" })
+    setNameIndex(curr => (curr + 1) % choices.length)
+  }
+
   return (
     <Wrapper>
+      <SecretButton onClick={secretClick} />
       <Conversation>
         <Title onClick={resetResponses}>Reset</Title>
         <History>
@@ -105,6 +113,8 @@ export default function Home() {
 const Wrapper = tw.div`h-full`
 const Spacer = tw.div`h-screen`
 const Title = tw.button`text-2xl text-center bg-zinc-900 flex items-center justify-center p-4 mx-2 mb-2 rounded-xl`
+
+const SecretButton = tw.button`w-16 h-16 fixed top-2 right-2 z-50`
 
 // Form Styles
 const FormContainer = styled.div(({ focused }) => [

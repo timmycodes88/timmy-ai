@@ -1,4 +1,4 @@
-let VOICE_NAME = "Reed"
+let VOICE_NAME = "Junior"
 let VOICES = []
 let VOICE
 
