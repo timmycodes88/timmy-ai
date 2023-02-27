@@ -32,7 +32,7 @@ export default function Home() {
       if (!responses[responses.length - 1].includes("Timmai:")) return
       const synth = window.speechSynthesis
       const utterThis = new SpeechSynthesisUtterance(
-        responses[responses.length - 1].split(":")[1]
+        responses[responses.length - 1].split(":")[1].replace("Timmai", "Tim A")
       )
       if (voice) utterThis.voice = voice
       synth.speak(utterThis)
