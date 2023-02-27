@@ -25,17 +25,20 @@ export default function Home() {
   const handleEnter = e => e.key === "Enter" && handleGo()
 
   useEffect(() => {
-    if (scrollToRef.current)
-      scrollToRef.current.scrollIntoView({ behavior: "smooth" })
+    const timeout = setTimeout(() => {
+      if (scrollToRef.current)
+        scrollToRef.current.scrollIntoView({ behavior: "smooth" })
 
-    if (!responses[responses.length - 1].includes("Timmy:")) return
-    const synth = window.speechSynthesis
-    const utterThis = new SpeechSynthesisUtterance(
-      responses[responses.length - 1].split(":")[1]
-    )
-    utterThis.voice = voice
-    synth.speak(utterThis)
-  }, [responses])
+      if (!responses[responses.length - 1].includes("Timmy:")) return
+      const synth = window.speechSynthesis
+      const utterThis = new SpeechSynthesisUtterance(
+        responses[responses.length - 1].split(":")[1]
+      )
+      utterThis.voice = voice
+      synth.speak(utterThis)
+    }, 100)
+    return () => clearTimeout(timeout)
+  }, [responses, voice])
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (loadingRef.current)
