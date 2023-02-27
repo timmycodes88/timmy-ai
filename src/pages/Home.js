@@ -52,9 +52,9 @@ export default function Home() {
         <Title onClick={resetResponses}>Reset</Title>
         <History>
           <Spacer />
-          {/* {names.map(name => (
+          {names.map(name => (
             <Message key={name}>{name}</Message>
-          ))} */}
+          ))}
           {responses.map((text, index) => {
             const lastMessage = index + 1 === responses.length
             const myMessage = text.includes("Me:")
