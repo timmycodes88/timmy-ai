@@ -2,11 +2,11 @@ import React, { useRef, useState, useEffect } from "react"
 import Loading from "../components/Loading"
 import tw, { styled } from "twin.macro"
 import useOpenAI from "../hooks/useOpenAI"
-import { useLoaderData } from "react-router-dom"
+import { useLoaderData, useSubmit } from "react-router-dom"
 
 export default function Home() {
+  const submit = useSubmit()
   const { voice, names } = useLoaderData()
-  console.log(names)
   const { responses, loading, error, generate, resetResponses } = useOpenAI()
 
   const [prompt, setPrompt] = useState("")
@@ -55,7 +55,9 @@ export default function Home() {
         <History>
           <Spacer />
           {names.map(name => (
-            <Message>{name}</Message>
+            <Message onClick={() => submit({ name }, { method: "post" })}>
+              {name}
+            </Message>
           ))}
           {responses.map((text, index) => {
             const lastMessage = index + 1 === responses.length
