@@ -25,6 +25,10 @@ export default function Home() {
     if (scrollToRef.current)
       scrollToRef.current.scrollIntoView({ behavior: "smooth" })
   }, [responses])
+  useEffect(() => {
+    if (loadingRef.current)
+      loadingRef.current.scrollIntoView({ behavior: "smooth" })
+  }, [loading])
 
   return (
     <Wrapper>
@@ -52,7 +56,7 @@ export default function Home() {
               </Message>
             )
           })}
-          {!loading && <Loading ref={loadingRef} />}
+          {loading && <Loading ref={loadingRef} />}
           {error && <ErrorText>An Unexpected Error occured</ErrorText>}
         </History>
       </Conversation>
