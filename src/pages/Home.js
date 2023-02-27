@@ -5,7 +5,7 @@ import useOpenAI from "../hooks/useOpenAI"
 import { useLoaderData } from "react-router-dom"
 
 export default function Home() {
-  // const { voice, names } = useLoaderData()
+  const { voice, names } = useLoaderData()
   const { responses, loading, error, generate, resetResponses } = useOpenAI()
 
   const [prompt, setPrompt] = useState("")
@@ -33,11 +33,11 @@ export default function Home() {
       const utterThis = new SpeechSynthesisUtterance(
         responses[responses.length - 1].split(":")[1]
       )
-      // utterThis.voice = voice
+      if (voice) utterThis.voice = voice
       synth.speak(utterThis)
     }, 100)
     return () => clearTimeout(timeout)
-  }, [responses])
+  }, [responses, voice])
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (loadingRef.current)

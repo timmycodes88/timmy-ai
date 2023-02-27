@@ -1,32 +1,18 @@
 let VOICE_NAME = "Rocko"
-let VOICES = []
 
 const voiceLoader = async () => {
-  await new Promise(resolve => {
-    const timeout = setTimeout(() => resolve(), 5000)
+  const { voice, voices } = await new Promise(resolve => {
+    const timeout = setTimeout(() => resolve({ voice: null, voices: [] }), 5000)
     const voices = window.speechSynthesis.getVoices()
-    if (voices.length) resolve()
+    if (voices.length) resolve(findVoice(voices))
     window.speechSynthesis.onvoiceschanged = () => {
+      const voices = window.speechSynthesis.getVoices()
       clearTimeout(timeout)
-      resolve()
+      resolve(findVoice(voices))
     }
   })
 
-  return null
-  const { voice, voices } = await getVoices()
-  VOICES = voices
   return { voice, names: voices.map(v => v.name) }
-}
-
-async function getVoices() {
-  return new Promise(resolve => {
-    if (VOICES.length) resolve(findVoice(VOICES))
-    const synth = window.speechSynthesis
-    synth.onvoiceschanged = () => {
-      console.log(findVoice(synth.getVoices()))
-      resolve(findVoice(synth.getVoices()))
-    }
-  })
 }
 
 const findVoice = voices => {
@@ -35,12 +21,12 @@ const findVoice = voices => {
   return { voice: voice, voices }
 }
 
-export const changeVoice = async ({ request }) => {
-  const formData = await request.formData()
-  const data = Object.fromEntries(formData.entries())
-  VOICES.forEach(v => {
-    if (v.name === data.name) VOICE_NAME = v.name
-  })
-  return null
-}
+// export const changeVoice = async ({ request }) => {
+//   const formData = await request.formData()
+//   const data = Object.fromEntries(formData.entries())
+//   VOICES.forEach(v => {
+//     if (v.name === data.name) VOICE_NAME = v.name
+//   })
+//   return null
+// }
 export default voiceLoader
