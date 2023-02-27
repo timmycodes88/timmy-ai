@@ -63,6 +63,7 @@ export default function Home() {
       <FormContainer focused={focused}>
         <Input
           ref={inputRef}
+          enterKeyHint="send"
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           value={prompt}
