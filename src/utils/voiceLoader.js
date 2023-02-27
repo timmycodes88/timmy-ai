@@ -14,7 +14,7 @@ const voiceLoader = async () => {
     }
   })
   VOICES = voices
-  return { voice: VOICE || voice, names: voices.map(v => v.name) }
+  return VOICE || voice
 }
 
 const findVoice = voices => {
