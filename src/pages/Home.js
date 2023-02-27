@@ -25,10 +25,6 @@ export default function Home() {
     if (scrollToRef.current)
       scrollToRef.current.scrollIntoView({ behavior: "smooth" })
   }, [responses])
-  useEffect(() => {
-    if (scrollToRef.current)
-      scrollToRef.current.scrollIntoView({ behavior: "smooth" })
-  }, [prompt])
 
   return (
     <Wrapper>
@@ -78,7 +74,7 @@ export default function Home() {
 
 // Wrapper Styles
 const Wrapper = tw.div`h-full`
-const Spacer = tw.div`h-[80vh]`
+const Spacer = tw.div`h-screen`
 const Title = tw.button`text-2xl text-center bg-zinc-900 flex items-center justify-center p-4 mx-2 mb-2 rounded-xl`
 
 // Form Styles
