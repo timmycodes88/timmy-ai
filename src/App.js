@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import { Outlet } from "react-router-dom"
 import tw, { styled, css } from "twin.macro"
+import Loading from "./components/Loading"
 
 const colors = [
   "red",
@@ -39,7 +40,15 @@ function App() {
       </NavBar>
 
       <Content>
-        <Outlet />
+        <Suspense
+          fallback={
+            <div className="bg-zinc-800 w-screen h-screen flex justify-center items-center">
+              <Loading />
+            </div>
+          }
+        >
+          <Outlet />
+        </Suspense>
       </Content>
     </Wrapper>
   )
