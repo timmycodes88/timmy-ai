@@ -2,20 +2,20 @@ let VOICE_NAME
 let VOICES
 
 const voiceLoader = async () => {
-  //   function getVoices() {
-  //     return new Promise(resolve => {
-  //       const synth = window.speechSynthesis
-  //       if (VOICES?.length) {
-  //         resolve(findVoice(VOICES))
-  //       } else {
-  //         synth.onvoiceschanged = () => {
-  //           resolve(findVoice(synth.getVoices()))
-  //         }
-  //       }
-  //     })
-  //   }
+  function getVoices() {
+    return new Promise(resolve => {
+      const synth = window.speechSynthesis
+      if (VOICES?.length) {
+        resolve(findVoice(VOICES))
+      } else {
+        synth.onvoiceschanged = () => {
+          resolve(findVoice(synth.getVoices()))
+        }
+      }
+    })
+  }
 
-  //   const { voice, voices } = await getVoices()
+  const { voice, voices } = await getVoices()
   //   VOICES = voices
   //   return { voice, names: voices.map(v => v.name) }
   return { voice: null, names: ["hi"] }
