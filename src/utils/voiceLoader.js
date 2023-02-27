@@ -16,15 +16,15 @@ const voiceLoader = async () => {
   }
 
   const { voice, voices } = await getVoices()
-  //   VOICES = voices
-  //   return { voice, names: voices.map(v => v.name) }
+  VOICES = voices
+  return { voice, names: voices.map(v => v.name) }
   return { voice: null, names: ["hi"] }
 }
 
 const findVoice = voices => {
   let voice = voices.find(voice => voice.name === VOICE_NAME) || voices[0]
 
-  return { voice, voices }
+  return { voice: voice || voice[0], voices }
 }
 
 export const changeVoice = async ({ request }) => {
