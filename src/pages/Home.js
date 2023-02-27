@@ -34,7 +34,7 @@ export default function Home() {
       const utterThis = new SpeechSynthesisUtterance(
         responses[responses.length - 1].split(":")[1]
       )
-      utterThis.voice = voice
+      // utterThis.voice = voice
       synth.speak(utterThis)
     }, 100)
     return () => clearTimeout(timeout)
