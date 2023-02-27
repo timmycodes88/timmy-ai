@@ -42,7 +42,7 @@ export default function useOpenAI() {
       })
       const response = res.data.choices[0].text
 
-      setResponses(curr => [...curr, "Timmy: " + response])
+      setResponses(curr => [...curr, "Timmai: " + response])
       setLoading(false)
     } catch {
       setError(true)
