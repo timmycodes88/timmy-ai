@@ -19,16 +19,13 @@ const voiceLoader = async () => {
 
 const findVoice = voices => {
   let voice = voices.find(voice => voice.name === VOICE_NAME) || voices[0]
-  console.log(voice)
   return { voice: voice, voices }
 }
 
 export const changeVoice = async ({ request }) => {
   const formData = await request.formData()
   const data = Object.fromEntries(formData.entries())
-  VOICES.forEach(v => {
-    if (v.name === data.name) VOICE_NAME = v.name
-  })
+  VOICE_NAME = data.name
   return null
 }
 export default voiceLoader
