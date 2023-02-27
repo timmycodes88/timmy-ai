@@ -78,7 +78,7 @@ export default function Home() {
 
 // Wrapper Styles
 const Wrapper = tw.div`h-full`
-const Spacer = tw.div`h-[50vh]`
+const Spacer = tw.div`h-[80vh]`
 const Title = tw.button`text-3xl text-center pb-4`
 
 // Form Styles
