@@ -1,4 +1,4 @@
-let VOICE_NAME = ""
+let VOICE_NAME = "Rocko"
 let VOICES = []
 
 const voiceLoader = async () => {
