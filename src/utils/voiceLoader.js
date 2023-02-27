@@ -20,7 +20,7 @@ async function getVoices() {
 
 const findVoice = voices => {
   let voice = voices.find(voice => voice.name === VOICE_NAME) || voices[0]
-  console.log(voices, voice)
+  console.log(voice)
   return { voice: voice, voices }
 }
 

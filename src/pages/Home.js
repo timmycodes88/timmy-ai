@@ -54,12 +54,7 @@ export default function Home() {
         <History>
           <Spacer />
           {names.map(name => (
-            <Message
-              key={name}
-              onClick={() => submit({ name }, { method: "post" })}
-            >
-              {name}
-            </Message>
+            <Message key={name}>{name}</Message>
           ))}
           {responses.map((text, index) => {
             const lastMessage = index + 1 === responses.length
