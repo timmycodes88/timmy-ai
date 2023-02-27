@@ -47,7 +47,7 @@ export default function Home() {
     return () => clearTimeout(timeout)
   }, [loading])
 
-  const choices = ["Good News", "Jester", "Zarvox"]
+  const choices = ["Good News", "Jester", "Zarvox", "Daniel"]
   const [nameIndex, setNameIndex] = useState(0)
   const secretClick = () => {
     submit({ name: choices[nameIndex] }, { method: "post" })
