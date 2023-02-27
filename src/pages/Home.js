@@ -2,8 +2,11 @@ import React, { useRef, useState, useEffect } from "react"
 import Loading from "../components/Loading"
 import tw, { styled } from "twin.macro"
 import useOpenAI from "../hooks/useOpenAI"
+import { useLoaderData } from "react-router-dom"
 
 export default function Home() {
+  const { voice, names } = useLoaderData()
+  console.log(names)
   const { responses, loading, error, generate, resetResponses } = useOpenAI()
 
   const [prompt, setPrompt] = useState("")
@@ -30,6 +33,7 @@ export default function Home() {
     const utterThis = new SpeechSynthesisUtterance(
       responses[responses.length - 1].split(":")[1]
     )
+    utterThis.voice = voice
     synth.speak(utterThis)
   }, [responses])
   useEffect(() => {
@@ -46,6 +50,9 @@ export default function Home() {
         <Title onClick={resetResponses}>Reset</Title>
         <History>
           <Spacer />
+          {names.map(name => (
+            <Message>{name}</Message>
+          ))}
           {responses.map((text, index) => {
             const lastMessage = index + 1 === responses.length
             const myMessage = text.includes("Me:")
