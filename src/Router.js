@@ -10,8 +10,8 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        loader: voiceLoader,
-        action: changeVoice,
+        // loader: voiceLoader,
+        // action: changeVoice,
         element: <Home />,
       },
     ],

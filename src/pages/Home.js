@@ -6,7 +6,7 @@ import { useLoaderData, useSubmit } from "react-router-dom"
 
 export default function Home() {
   const submit = useSubmit()
-  const { voice, names } = useLoaderData()
+  // const { voice, names } = useLoaderData()
   const { responses, loading, error, generate, resetResponses } = useOpenAI()
 
   const [prompt, setPrompt] = useState("")
@@ -34,12 +34,11 @@ export default function Home() {
       const utterThis = new SpeechSynthesisUtterance(
         responses[responses.length - 1].split(":")[1]
       )
-      console.log(voice)
-      utterThis.voice = voice
+      // utterThis.voice = voice
       synth.speak(utterThis)
     }, 100)
     return () => clearTimeout(timeout)
-  }, [responses, voice])
+  }, [responses])
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (loadingRef.current)
@@ -54,14 +53,14 @@ export default function Home() {
         <Title onClick={resetResponses}>Reset</Title>
         <History>
           <Spacer />
-          {names.map(name => (
+          {/* {names.map(name => (
             <Message
               key={name}
               onClick={() => submit({ name }, { method: "post" })}
             >
               {name}
             </Message>
-          ))}
+          ))} */}
           {responses.map((text, index) => {
             const lastMessage = index + 1 === responses.length
             const myMessage = text.includes("Me:")
