@@ -1,7 +1,7 @@
-import React from "react"
+import React, { forwardRef } from "react"
 import tw, { styled, css } from "twin.macro"
 
-export default function Loading() {
+const Loading = forwardRef((props, ref) => {
   return (
     <Styles>
       <div class="lds-spinner">
@@ -20,7 +20,9 @@ export default function Loading() {
       </div>
     </Styles>
   )
-}
+})
+
+export default Loading
 
 const Styles = styled.div(() => [
   tw`mx-auto scale-50`,

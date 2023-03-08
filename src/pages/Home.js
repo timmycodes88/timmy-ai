@@ -3,6 +3,8 @@ import Loading from "../components/Loading"
 import tw, { styled } from "twin.macro"
 import useOpenAI from "../hooks/useOpenAI"
 import { useLoaderData, useSubmit } from "react-router-dom"
+import SyntaxHighlighter from "react-syntax-highlighter"
+import { docco, dark } from "react-syntax-highlighter/dist/esm/styles/hljs"
 
 export default function Home() {
   const submit = useSubmit()
@@ -29,10 +31,10 @@ export default function Home() {
       if (scrollToRef.current)
         scrollToRef.current.scrollIntoView({ behavior: "smooth" })
 
-      if (!responses[responses.length - 1].includes("Timmai:")) return
+      if (responses[responses.length - 1].role === "user") return
       const synth = window.speechSynthesis
       const utterThis = new SpeechSynthesisUtterance(
-        responses[responses.length - 1].split(":")[1].replace("Timmai", "Tim A")
+        responses[responses.length - 1].content
       )
       if (voice) utterThis.voice = voice
       synth.speak(utterThis)
@@ -47,13 +49,13 @@ export default function Home() {
     return () => clearTimeout(timeout)
   }, [loading])
 
-  const choices = ["Good News", "Jester", "Zarvox", "Daniel"]
+  const choices = ["Good News", "Jester", "Zarvox"]
   const [nameIndex, setNameIndex] = useState(0)
   const secretClick = () => {
     submit({ name: choices[nameIndex] }, { method: "post" })
     setNameIndex(curr => (curr + 1) % choices.length)
   }
-
+  console.log(responses)
   return (
     <Wrapper>
       <SecretButton onClick={secretClick} />
@@ -61,26 +63,38 @@ export default function Home() {
         <Title onClick={resetResponses}>Reset</Title>
         <History>
           <Spacer />
-          {responses.map((text, index) => {
+          {responses.map(({ role, content }, index) => {
             const lastMessage = index + 1 === responses.length
-            const myMessage = text.includes("Me:")
+            const message = content.split("```")
+            console.log("message", message)
             return (
-              <Message
-                myMessage={myMessage}
-                ref={lastMessage ? scrollToRef : undefined}
-              >
-                {text
-                  .split(":")
-                  .map((text, index) =>
-                    index % 2 === 0 ? (
-                      <strong>{text}:</strong>
-                    ) : (
-                      <span>{text}</span>
-                    )
-                  )}
-              </Message>
+              <>
+                <Message
+                  myMessage={role === "user"}
+                  ref={lastMessage ? scrollToRef : undefined}
+                >
+                  {message.map((text, index) => {
+                    if (index % 2 === 0) {
+                      return text
+                    } else {
+                      let language = "javascript"
+                      if (text.includes("python")) language = "python"
+                      else if (text.includes("json")) language = "json"
+                      else if (text.includes("html")) language = "html"
+                      return (
+                        <CodeWrapper>
+                          <SyntaxHighlighter language={language} style={dark}>
+                            {text}
+                          </SyntaxHighlighter>
+                        </CodeWrapper>
+                      )
+                    }
+                  })}
+                </Message>
+              </>
             )
           })}
+
           {loading && <Loading ref={loadingRef} />}
           {error && <ErrorText>An Unexpected Error occured</ErrorText>}
         </History>
@@ -120,7 +134,9 @@ const History = styled.div(({ focused }) => [
   focused && tw`h-[calc(100% - 16.25rem)]`,
 ])
 const Message = styled.div(({ myMessage }) => [
-  tw`p-4 rounded-lg`,
+  tw`p-4 rounded-lg whitespace-pre-wrap`,
   myMessage ? tw`bg-zinc-900` : tw`bg-white text-zinc-900`,
 ])
 const ErrorText = tw.p`text-red-500 text-center`
+
+const CodeWrapper = tw.div`rounded-lg overflow-hidden`

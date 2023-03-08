@@ -2,6 +2,16 @@ import openai from "../utils/OpenAIConfig"
 import { useState } from "react"
 import { pretty } from "../utils/pretty"
 
+const intialMessages = [
+  {
+    role: "system",
+    content:
+      "You are helpful assistant named Timmai. You are here to help people with their problems. You are also very wise when the question allows for it.",
+  },
+  { role: "user", content: "" },
+  { role: "assistant", content: "" },
+]
+
 /**
  * @typedef {Object} OpenAI
  * @property {string[]} responses - Array of responses
@@ -15,7 +25,9 @@ import { pretty } from "../utils/pretty"
  */
 export default function useOpenAI() {
   //* Responses State
-  const [responses, setResponses] = useState(["Timmai: Hi, I am Timmai!"])
+  const [responses, setResponses] = useState([
+    { role: "assistant", content: "Hello, I am Timmai." },
+  ])
 
   //* Loading & Error State
   const [loading, setLoading] = useState(false)
@@ -25,24 +37,25 @@ export default function useOpenAI() {
   const resetResponses = () => {
     setError(false)
     setLoading(false)
-    setResponses(["Timmai: Hi, I am Timmai!"])
+    setResponses([{ role: "assistant", content: "Hello, I am Timmai." }])
   }
   //* Get Responses
   const generate = async prompt => {
     if (!prompt) return
     setLoading(true)
     setError(false)
-    setResponses(curr => [...curr, "Me: " + prompt])
+    const messages = [...responses, { role: "user", content: pretty(prompt) }]
+    setResponses(messages)
     try {
-      const res = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: pretty(prompt),
+      const res = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: [...intialMessages, ...messages],
         temperature: 0.7,
         max_tokens: 2048,
       })
-      const response = res.data.choices[0].text
+      const response = res.data.choices[0].message
 
-      setResponses(curr => [...curr, "Timmai: " + response])
+      setResponses(curr => [...curr, response])
       setLoading(false)
     } catch {
       setError(true)
