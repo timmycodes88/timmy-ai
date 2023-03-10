@@ -2,13 +2,13 @@ import React, { useRef, useState, useEffect } from "react"
 import Loading from "../components/Loading"
 import tw, { styled } from "twin.macro"
 import useOpenAI from "../hooks/useOpenAI"
-import { useLoaderData, useSubmit } from "react-router-dom"
+import { useSubmit } from "react-router-dom"
 import SyntaxHighlighter from "react-syntax-highlighter"
-import { docco, dark } from "react-syntax-highlighter/dist/esm/styles/hljs"
+import { anOldHope } from "react-syntax-highlighter/dist/esm/styles/hljs"
 
 export default function Home() {
   const submit = useSubmit()
-  const { voice } = useLoaderData()
+
   const { responses, loading, error, generate, resetResponses } = useOpenAI()
 
   const [prompt, setPrompt] = useState("")
@@ -32,15 +32,14 @@ export default function Home() {
         scrollToRef.current.scrollIntoView({ behavior: "smooth" })
 
       if (responses[responses.length - 1].role === "user") return
-      const synth = window.speechSynthesis
-      const utterThis = new SpeechSynthesisUtterance(
-        responses[responses.length - 1].content
+      submit(
+        { text: responses[responses.length - 1].content },
+        { method: "post" }
       )
-      if (voice) utterThis.voice = voice
-      synth.speak(utterThis)
     }, 100)
     return () => clearTimeout(timeout)
-  }, [responses, voice])
+  }, [responses, submit])
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (loadingRef.current)
@@ -49,16 +48,8 @@ export default function Home() {
     return () => clearTimeout(timeout)
   }, [loading])
 
-  const choices = ["Good News", "Jester", "Zarvox"]
-  const [nameIndex, setNameIndex] = useState(0)
-  const secretClick = () => {
-    submit({ name: choices[nameIndex] }, { method: "post" })
-    setNameIndex(curr => (curr + 1) % choices.length)
-  }
-  console.log(responses)
   return (
     <Wrapper>
-      <SecretButton onClick={secretClick} />
       <Conversation>
         <Title onClick={resetResponses}>Reset</Title>
         <History>
@@ -83,7 +74,10 @@ export default function Home() {
                       else if (text.includes("html")) language = "html"
                       return (
                         <CodeWrapper>
-                          <SyntaxHighlighter language={language} style={dark}>
+                          <SyntaxHighlighter
+                            language={language}
+                            style={anOldHope}
+                          >
                             {text}
                           </SyntaxHighlighter>
                         </CodeWrapper>
@@ -119,8 +113,6 @@ export default function Home() {
 const Wrapper = tw.div`h-full`
 const Spacer = tw.div`h-screen`
 const Title = tw.button`text-2xl text-center bg-zinc-900 flex items-center justify-center p-4 mx-2 mb-2 rounded-xl`
-
-const SecretButton = tw.button`w-16 h-16 fixed top-2 right-2 z-50`
 
 // Form Styles
 const FormContainer = styled.div(({ focused }) => [
